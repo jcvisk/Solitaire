@@ -1,0 +1,67 @@
+body {
+    background-color: #2f4f30;
+}
+
+header.header {
+    display: flex;
+    justify-content: space-between;
+    padding-top: .5rem;
+    padding-bottom: .5rem;
+
+    color: white;
+}
+
+.tablero {
+    display: grid;
+    grid-template-columns: repeat(7, 1fr);
+    grid-template-rows: repeat(1, 1fr);
+}
+
+.mazoVisible {
+    grid-area: 1 / 2 / 2 / 4;
+}
+
+.mazoVisible img {
+    position: relative;
+    left: 125px;
+    margin-left: -125px;
+}
+
+.mazoVisible img:nth-last-child(n+4){
+    display: none;
+}
+
+.tablero div .cards{
+    outline: 3px solid rgba(0, 0, 0, 0.1);
+    border-radius: 5px;
+    width: 150px;
+    height: 229.23px;
+}
+
+.secc2 .cards:nth-child(n+8) img{
+    margin-top: -150%;
+} 
+
+.secc2 img{
+    position: relative;
+    top: 190px;
+    margin-top: -130%;
+    /* margin-top: -190px; */
+}
+
+#newCard,
+.activo{
+    cursor: pointer;
+}
+
+.selected{
+    filter: drop-shadow(0px 0px 10px #75FF00);
+}
+
+.cards.palos{
+    position: relative;
+}
+
+.cards.palos img{
+    position: absolute;
+}
