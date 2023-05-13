@@ -1,4 +1,4 @@
-(() => {
+//(() => {
     const uuidv4 = () => {
         return 'xxxxxxxx-xxxx-4xxx-yxxx-xxxxxxxxxxxx'.replace(/[xy]/g, function (c) {
             const r = Math.random() * 16 | 0, v = c == 'x' ? r : (r & 0x3 | 0x8);
@@ -129,12 +129,16 @@
             }
             playSound('flipcard');
         } else {
-            playSound('shuffle');
+            
             mazo = [...mazoAux.reverse()];
             mazoAux = [];
             if (mazo.length !== 0) {
                 newCardButton.src = "assets/cartas/red_back.png";
                 newCardButton.alt = "card back";
+
+                playSound('shuffle');
+            }else{
+                playSound('empty');
             }
             mazoVisibleDiv.innerHTML = "";
 
@@ -356,4 +360,4 @@
             }
         });
     });
-})();
+//})();
