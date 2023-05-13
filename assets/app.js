@@ -1,6 +1,20 @@
-import Carta from './Carta.js';
-
 (() => {
+    const uuidv4 = () => {
+        return 'xxxxxxxx-xxxx-4xxx-yxxx-xxxxxxxxxxxx'.replace(/[xy]/g, function (c) {
+            const r = Math.random() * 16 | 0, v = c == 'x' ? r : (r & 0x3 | 0x8);
+            return v.toString(16);
+        });
+    };
+    
+    class Carta {
+        constructor(numero, palo) {
+            this.numero = numero;
+            this.palo = palo;
+            this.uuid = uuidv4();
+            this.color = palo === 'S' || palo === 'C' ? 'N' : 'R';
+        }
+    }
+
     //elementsHTML
     const newCardButton = document.getElementById('newCard');
     const mazoVisibleDiv = document.getElementById('mazoVisible');
@@ -242,6 +256,7 @@ import Carta from './Carta.js';
         cartaSoltada.parentElement.removeChild(cartaSoltada, cartaSoltada);
 
         if (cartaOrigen === "mazoVisibleDiv") {
+            console.log('elimina a: '+uuid);
             setPuntos('+', 5);
             eliminarDelMazo(uuid);
         }
