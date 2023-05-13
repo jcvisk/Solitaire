@@ -1,4 +1,4 @@
-//(() => {
+(() => {
     const uuidv4 = () => {
         return 'xxxxxxxx-xxxx-4xxx-yxxx-xxxxxxxxxxxx'.replace(/[xy]/g, function (c) {
             const r = Math.random() * 16 | 0, v = c == 'x' ? r : (r & 0x3 | 0x8);
@@ -246,7 +246,10 @@
                     const cartaSoltadaValue = getValue(cartaSoltada.getAttribute("uuid"));
                     if (cartaSoltadaValue !== lastCardValue + 1) return;
                 }
-                cartaOrigen === "mazoVisibleDiv" ? setPuntos('+', 5) : setPuntos('+', 10);
+                if (cartaOrigen !== "columnPalos") {
+                    cartaOrigen === "mazoVisibleDiv" ? setPuntos('+', 5) : setPuntos('+', 10);
+                }
+                
                 deleteAndAddCard(column, cartaSoltada, cartaOrigen, uuid);
                 voltearCarta(columnaActual);
             }
@@ -260,13 +263,13 @@
         cartaSoltada.parentElement.removeChild(cartaSoltada, cartaSoltada);
 
         if (cartaOrigen === "mazoVisibleDiv") {
-            console.log('elimina a: '+uuid);
             setPuntos('+', 5);
             eliminarDelMazo(uuid);
         }
 
         // agregando la carta a la columna
         column.appendChild(cartaSoltada);
+        column.classList.contains("columns") ? cartaSoltada.setAttribute("data-origin",  "column") : cartaSoltada.setAttribute("data-origin",  "columnPalos");
         column.classList.remove("drag-over");
     }
 
@@ -360,4 +363,4 @@
             }
         });
     });
-//})();
+})();
