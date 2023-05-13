@@ -1,30 +1,68 @@
-<!DOCTYPE html>
+<!doctype html>
 <html lang="en">
 
 <head>
-    <meta charset="UTF-8" />
-    <link rel="icon" type="image/svg+xml" href="/vite.svg" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>Solitario</title>
-    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.0.0/dist/css/bootstrap.min.css"
-        integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous">
+    <!-- Required meta tags -->
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+
+    <!-- Bootstrap CSS -->
+    <link href="assets/bootstrap/css/bootstrap.min.css" rel="stylesheet">
+    <!-- Custom CSS -->
     <link rel="stylesheet" href="assets/css/style.css">
+
+    <title>Solitarie</title>
 </head>
 
 <body>
-    <header class="header container-fluid">
-        <div>
-            <button class="btn btn-primary">Menu</button>
-        </div>
-        <div>
-            <h3>Puntuación <span>105</span></h3>
-        </div>
-        <div>
-            <h3 id="timer">00:00:00</h3>
-        </div>
+    <header>
+        <nav class="navbar navbar-expand-lg navbar-dark bg-glass">
+            <div class="container-fluid">
+                <a class="navbar-brand" data-bs-toggle="offcanvas" href="#offcanvasExample" role="button"
+                    aria-controls="offcanvasExample">
+                    <span class="navbar-toggler-icon"></span>
+                </a>
+                <div>
+                    <div class="navbar-nav ms-auto">
+                        <a class="nav-link active">
+                            <h3 id="timer">00:00:00</h3>
+                        </a>
+                    </div>
+                </div>
+            </div>
+        </nav>
+
+        <div class="offcanvas offcanvas-start" tabindex="-1" id="offcanvasExample"
+            aria-labelledby="offcanvasExampleLabel">
+            <div class="offcanvas-header">
+                <h5 class="offcanvas-title" id="offcanvasExampleLabel">Offcanvas</h5>
+                <button type="button" class="btn-close text-reset" data-bs-dismiss="offcanvas" aria-label="Close"></button>
+            </div>
+            <div class="offcanvas-body">
+                <div>
+                    <img src="assets/icons/klondike.png" alt="klondike" class="sidebar-icon">
+                    Klondike
+                </div>
+                <div>
+                    <img src="assets/icons/spider.png" alt="spider" class="sidebar-icon">
+                    Spider
+                </div>
+                <div>
+                    <img src="assets/icons/freecell.webp" alt="freecell" class="sidebar-icon">
+                    FreeCell
+                </div>
+                <div>
+                    <img src="assets/icons/pyramid.png" alt="pyramid" class="sidebar-icon">
+                    Pyramid
+                </div>
+                <div>
+                    <img src="assets/icons/tripeaks.webp" alt="tripeaks" class="sidebar-icon">
+                    TriPeaks
+                </div>
+            </div>
     </header>
     <main>
-        <section class="container-fluid tablero">
+        <section class="container tablero mt-5">
             <div class="m-auto">
                 <!-- Aquí se muestra el mazo para cliquear y mostrar la carta disponible -->
                 <div class="cards">
@@ -51,7 +89,7 @@
         </section>
 
         <!-- Aqui se muestran las columas del juejo -->
-        <section class="container-fluid tablero mt-5 secc2">
+        <section class="container tablero mt-5 secc2">
             <div class="m-auto">
                 <div class="cards columns" value="0"></div>
             </div>
@@ -75,7 +113,8 @@
             </div>
         </section>
     </main>
-
+    <!-- Option 1: Bootstrap Bundle with Popper -->
+    <script src="assets/bootstrap/js/bootstrap.bundle.min.js"></script>
     <script type="module" src="assets/app.js"></script>
 </body>
 
