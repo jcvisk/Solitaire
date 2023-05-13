@@ -125,7 +125,6 @@ import Carta from './Carta.js';
 
             if (j == i) {
                 img.src = `assets/cartas/${carta.numero}${carta.palo}.png`;
-                img.classList.add("last-card");
                 img.setAttribute("show", true);
             }
 
@@ -285,7 +284,7 @@ import Carta from './Carta.js';
     columnsPalos.forEach((column) => {
 
         column.addEventListener("dragstart", (e) => {
-            e.dataTransfer.setData("text/plain", e.target.getAttribute("uuid"));
+            e.dataTransfer.setData("text/plain", JSON.stringify([e.target.getAttribute("uuid")]));
             e.target.setAttribute("data-origin", "column");
         });
 
