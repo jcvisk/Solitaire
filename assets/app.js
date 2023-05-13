@@ -7,6 +7,7 @@ import Carta from './Carta.js';
     const columnsDivs = document.querySelectorAll('.columns');
     const columnsPalos = document.querySelectorAll('.palos');
     const timer = document.getElementById("timer");
+    const points = document.getElementById("points");
 
     let timerInicializado = false;
 
@@ -14,30 +15,44 @@ import Carta from './Carta.js';
     let seconds = 0;
     let minutes = 0;
     let hours = 0;
-
     // Actualizamos el contador de tiempo cada segundo
     function initTimer() {
         setInterval(() => {
             seconds++;
-    
+
             if (seconds >= 60) {
                 seconds = 0;
                 minutes++;
-    
+
                 if (minutes >= 60) {
                     minutes = 0;
                     hours++;
                 }
             }
-    
+
             // Formateamos el tiempo para mostrarlo en el HTML
             const time = `${hours.toString().padStart(2, "0")}:${minutes.toString().padStart(2, "0")}:${seconds.toString().padStart(2, "0")}`;
-    
+
             // Actualizamos el HTML con el tiempo actualizado
             timer.innerHTML = time;
         }, 1000);
     }
 
+    //Funcion para los sonidos
+    function playSound(id) {
+        const audio = document.getElementById(id)
+        if (!audio) return;
+
+        audio.currentTime = 0;
+        audio.play();
+    }
+
+    //Inicializamos los puntos en cero
+    let puntaje = 0;
+    function setPuntos(operation, puntos) {
+        puntaje = operation === '+' ? puntaje + puntos : puntaje - puntos;
+        points.innerHTML = puntaje.toString();
+    }
 
     const VALORES = {
         A: 1,
@@ -86,7 +101,7 @@ import Carta from './Carta.js';
             initTimer();
             timerInicializado = !timerInicializado;
         }
-        
+
         if (mazo.length > 0) {
             const carta = mazo.pop();
 
@@ -98,7 +113,9 @@ import Carta from './Carta.js';
                 newCardButton.src = "assets/cartas/empty.png";
                 newCardButton.alt = "empty card";
             }
+            playSound('flipcard');
         } else {
+            playSound('shuffle');
             mazo = [...mazoAux.reverse()];
             mazoAux = [];
             if (mazo.length !== 0) {
@@ -106,6 +123,7 @@ import Carta from './Carta.js';
                 newCardButton.alt = "card back";
             }
             mazoVisibleDiv.innerHTML = "";
+
         }
     }
 
@@ -159,6 +177,7 @@ import Carta from './Carta.js';
             if (ultimaCarta.getAttribute("show") === "false") {
                 ultimaCarta.setAttribute("src", getUrlImg(ultimaCarta.getAttribute("uuid")));
                 ultimaCarta.setAttribute("show", "true");
+                setPuntos('+', 5);
             }
         }
     }
@@ -173,7 +192,7 @@ import Carta from './Carta.js';
             initTimer();
             timerInicializado = !timerInicializado;
         }
-        
+
         let lastCard = column.lastElementChild;
         if (!columnsPalos) {
             for (const cartaSoltada of cartasSoltadas) {
@@ -189,6 +208,8 @@ import Carta from './Carta.js';
                     const cartaSoltadaValue = getValue(cartaSoltada.getAttribute("uuid"));
                     if (cartaSoltadaValue !== lastCardValue - 1) return;
                 }
+
+                if (cartaOrigen === "columnPalos") setPuntos('-', 10);
 
                 deleteAndAddCard(column, cartaSoltada, cartaOrigen, uuid);
                 voltearCarta(columnaActual);
@@ -207,11 +228,13 @@ import Carta from './Carta.js';
                     const cartaSoltadaValue = getValue(cartaSoltada.getAttribute("uuid"));
                     if (cartaSoltadaValue !== lastCardValue + 1) return;
                 }
-
+                cartaOrigen === "mazoVisibleDiv" ? setPuntos('+', 5) : setPuntos('+', 10);
                 deleteAndAddCard(column, cartaSoltada, cartaOrigen, uuid);
                 voltearCarta(columnaActual);
             }
-        }        
+        }
+
+        playSound('movecard');
     }
 
     function deleteAndAddCard(column, cartaSoltada, cartaOrigen, uuid) {
@@ -219,7 +242,8 @@ import Carta from './Carta.js';
         cartaSoltada.parentElement.removeChild(cartaSoltada, cartaSoltada);
 
         if (cartaOrigen === "mazoVisibleDiv") {
-            eliminarDelMazo(uuid)
+            setPuntos('+', 5);
+            eliminarDelMazo(uuid);
         }
 
         // agregando la carta a la columna
@@ -277,7 +301,10 @@ import Carta from './Carta.js';
             const cartaOrigen = cartasSoltadas[0].getAttribute("data-origin");
             //columna origen; de donde vienen las cartas
             const columnaActual = cartasSoltadas[0].parentElement;
-            validaMovimiento(column, cartasSoltadas, cartaOrigen, columnaActual, uuids, false);
+
+            if (cartasSoltadas[0].getAttribute("show") !== "false") {
+                validaMovimiento(column, cartasSoltadas, cartaOrigen, columnaActual, uuids, false);
+            }
         });
     });
 
@@ -285,7 +312,7 @@ import Carta from './Carta.js';
 
         column.addEventListener("dragstart", (e) => {
             e.dataTransfer.setData("text/plain", JSON.stringify([e.target.getAttribute("uuid")]));
-            e.target.setAttribute("data-origin", "column");
+            e.target.setAttribute("data-origin", "columnPalos");
         });
 
         column.addEventListener("dragover", (e) => {
@@ -308,7 +335,10 @@ import Carta from './Carta.js';
             const cartaOrigen = cartasSoltadas[0].getAttribute("data-origin");
             //columna origen; de donde vienen las cartas
             const columnaActual = cartasSoltadas[0].parentElement;
-            validaMovimiento(column, cartasSoltadas, cartaOrigen, columnaActual, uuids, true);
+
+            if (cartasSoltadas[0].getAttribute("show") !== "false") {
+                validaMovimiento(column, cartasSoltadas, cartaOrigen, columnaActual, uuids, true);
+            }
         });
     });
 })();
