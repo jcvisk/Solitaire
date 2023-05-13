@@ -6,6 +6,38 @@ import Carta from './Carta.js';
     const mazoVisibleDiv = document.getElementById('mazoVisible');
     const columnsDivs = document.querySelectorAll('.columns');
     const columnsPalos = document.querySelectorAll('.palos');
+    const timer = document.getElementById("timer");
+
+    let timerInicializado = false;
+
+    // Inicializamos el contador de tiempo
+    let seconds = 0;
+    let minutes = 0;
+    let hours = 0;
+
+    // Actualizamos el contador de tiempo cada segundo
+    function initTimer() {
+        setInterval(() => {
+            seconds++;
+    
+            if (seconds >= 60) {
+                seconds = 0;
+                minutes++;
+    
+                if (minutes >= 60) {
+                    minutes = 0;
+                    hours++;
+                }
+            }
+    
+            // Formateamos el tiempo para mostrarlo en el HTML
+            const time = `${hours.toString().padStart(2, "0")}:${minutes.toString().padStart(2, "0")}:${seconds.toString().padStart(2, "0")}`;
+    
+            // Actualizamos el HTML con el tiempo actualizado
+            timer.innerHTML = time;
+        }, 1000);
+    }
+
 
     const VALORES = {
         A: 1,
@@ -50,6 +82,11 @@ import Carta from './Carta.js';
 
 
     function pedirCarta() {
+        if (!timerInicializado) {
+            initTimer();
+            timerInicializado = !timerInicializado;
+        }
+        
         if (mazo.length > 0) {
             const carta = mazo.pop();
 
@@ -133,6 +170,11 @@ import Carta from './Carta.js';
     }
 
     function validaMovimiento(column, cartasSoltadas, cartaOrigen, columnaActual, uuid, columnsPalos) {
+        if (!timerInicializado) {
+            initTimer();
+            timerInicializado = !timerInicializado;
+        }
+        
         let lastCard = column.lastElementChild;
         if (!columnsPalos) {
             for (const cartaSoltada of cartasSoltadas) {
@@ -170,7 +212,7 @@ import Carta from './Carta.js';
                 deleteAndAddCard(column, cartaSoltada, cartaOrigen, uuid);
                 voltearCarta(columnaActual);
             }
-        }
+        }        
     }
 
     function deleteAndAddCard(column, cartaSoltada, cartaOrigen, uuid) {
