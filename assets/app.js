@@ -305,19 +305,20 @@
 
         column.addEventListener("dragover", (e) => {
             e.preventDefault();
-            column.classList.add("drag-over");
+            column.lastElementChild ? column.lastElementChild.classList.add("drag-over") : column.classList.add("drag-over");
         });
 
         column.addEventListener("dragenter", (e) => {
-            column.classList.add("drag-over");
+            column.lastElementChild ? column.lastElementChild.classList.add("drag-over") : column.classList.add("drag-over");
         });
 
         column.addEventListener("dragleave", (e) => {
-            column.classList.remove("drag-over");
+            column.lastElementChild ? column.lastElementChild.classList.remove("drag-over") : column.classList.remove("drag-over");
         });
 
         column.addEventListener("drop", (e) => {
             e.preventDefault();
+            column.lastElementChild ? column.lastElementChild.classList.remove("drag-over") : column.classList.remove("drag-over");
             const uuids = JSON.parse(e.dataTransfer.getData("text/plain"));
             const cartasSoltadas = Array.from(document.querySelectorAll(`img[uuid|="${uuids.join('"],[uuid|="')}"]`));
             const cartaOrigen = cartasSoltadas[0].getAttribute("data-origin");
@@ -352,6 +353,7 @@
 
         column.addEventListener("drop", (e) => {
             e.preventDefault();
+            column.classList.remove("drag-over");
             const uuids = JSON.parse(e.dataTransfer.getData("text/plain"));
             const cartasSoltadas = Array.from(document.querySelectorAll(`img[uuid|="${uuids.join('"],[uuid|="')}"]`));
             const cartaOrigen = cartasSoltadas[0].getAttribute("data-origin");
