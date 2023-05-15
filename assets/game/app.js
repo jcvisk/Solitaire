@@ -1,21 +1,11 @@
+import Carta from "./Carta.js";
+import { shuffle, shuffleExpertLevel } from "./mixer.js";
+
 (() => {
-    const uuidv4 = () => {
-        return 'xxxxxxxx-xxxx-4xxx-yxxx-xxxxxxxxxxxx'.replace(/[xy]/g, function (c) {
-            const r = Math.random() * 16 | 0, v = c == 'x' ? r : (r & 0x3 | 0x8);
-            return v.toString(16);
-        });
-    };
-
-    class Carta {
-        constructor(numero, palo) {
-            this.numero = numero;
-            this.palo = palo;
-            this.uuid = uuidv4();
-            this.color = palo === 'S' || palo === 'C' ? 'N' : 'R';
-        }
-    }
-
     //elementsHTML
+    const btnReproducir = document.getElementById('reproducir');
+    const cerrarModal = document.getElementById('cerrarModal');
+    const showOptionsModal = document.getElementById('showOptionsModal');
     const newCardButton = document.getElementById('newCard');
     const mazoVisibleDiv = document.getElementById('mazoVisible');
     const columnsDivs = document.querySelectorAll('.columns');
@@ -23,15 +13,24 @@
     const timer = document.getElementById("timer");
     const points = document.getElementById("points");
 
+    (() => {
+        showOptionsModal.click();
+    })();
+
+    let mazo = [];
+    let mazoAux = [];
+    let mazoResp = [];
+
     let timerInicializado = false;
 
     // Inicializamos el contador de tiempo
     let seconds = 0;
     let minutes = 0;
     let hours = 0;
+    let timerInterval; // Variable para almacenar el intervalo del temporizador
     // Actualizamos el contador de tiempo cada segundo
     function initTimer() {
-        setInterval(() => {
+        timerInterval = setInterval(() => {
             seconds++;
 
             if (seconds >= 60) {
@@ -51,6 +50,24 @@
             timer.innerHTML = time;
         }, 1000);
     }
+
+    function pauseTimer() {
+        clearInterval(timerInterval);
+    }
+
+    function resetTimer() {
+        clearInterval(timerInterval);
+        seconds = 0;
+        minutes = 0;
+        hours = 0;
+        timerInicializado = false;
+        timer.innerHTML = "00:00:00";
+    }
+
+    function resumeTimer() {
+        initTimer();
+    }
+
 
     //Funcion para los sonidos
     function playSound(id) {
@@ -75,7 +92,7 @@
         K: 13
     }
 
-    const crearMazo = () => {
+    const crearMazo = (dificultad) => {
         const mazo = [];
         const palos = ['C', 'D', 'H', 'S'];
         const numeros = ['A', '2', '3', '4', '5', '6', '7', '8', '9', '10', 'J', 'Q', 'K'];
@@ -84,22 +101,28 @@
                 mazo.push(new Carta(numero, palo));
             }
         }
+
         //mezclo el mazo
-        for (let i = mazo.length - 1; i > 0; i--) {
-            const j = Math.floor(Math.random() * (i + 1));
-            [mazo[i], mazo[j]] = [mazo[j], mazo[i]];
+        switch (dificultad) {
+            case '1':
+                return shuffle(mazo, 1);
+            case '2':
+                return shuffle(mazo, 10);
+            case '3':
+                return shuffle(mazo, 20);
+            case '4':
+                return shuffleExpertLevel(mazo, 25);
+            case '5':
+                return shuffleExpertLevel(mazo, 35);
+            case '6':
+                return shuffleExpertLevel(mazo, 45);
+            default:
+                alert("ERROR: EL NIVEL SELECCINADO NO EXISTE");
+                break;
         }
-        return mazo;
     }
 
-    let mazo = crearMazo();
-    let mazoAux = [];
-    let mazoResp = [...mazo];
-
-    /**
-     * Función anonima que llena las columnas
-     */
-    (() => {
+    const llenarColumnas = () => {
         for (let i = 0; i < columnsDivs.length; i++) {
             for (let j = 0; j < i + 1; j++) {
                 const carta = mazo.pop();
@@ -107,7 +130,7 @@
                 createImgCard(carta, false, i, j);
             }
         }
-    })();
+    };
 
 
     function pedirCarta() {
@@ -166,6 +189,29 @@
 
             columnsDivs[i].appendChild(img);
         }
+    }
+
+    const limpiarTablero = () => {
+        //se recetean los mazos
+        mazo = [];
+        mazoAux = [];
+        mazoResp = [];
+        //se recetean las columnas
+        mazoVisibleDiv.innerHTML = "";
+        columnsDivs.forEach((column) => {
+            column.innerHTML = "";
+        });
+        columnsPalos.forEach((column) => {
+            column.innerHTML = "";
+        });
+        //se recetea el timer
+        resetTimer();
+        //se recetea el puntaje
+        puntaje = 0;
+        points.innerHTML = puntaje;
+
+        newCardButton.src = "assets/cartas/red_back.png";
+        newCardButton.alt = "card back";
     }
 
     function getUrlImg(uuid) {
@@ -274,6 +320,22 @@
     }
 
     //Listeners
+
+    btnReproducir.addEventListener('click', () => {
+        const inputs = document.querySelectorAll('input[name="difficultyOption"]');
+        inputs.forEach((input) => {
+            if (input.checked) {
+                limpiarTablero();
+
+                mazo = crearMazo(input.value);
+                mazoResp = [...mazo];
+                llenarColumnas();
+
+                cerrarModal.click();
+            }
+        });
+    });
+
     newCardButton.addEventListener('click', () => {
         pedirCarta();
     });

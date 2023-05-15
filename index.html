@@ -19,20 +19,23 @@
     <!-- Primary Meta Tags -->
     <title>Solitarie</title>
     <meta name="title" content="Solitarie">
-    <meta name="description" content="El Solitario es un juego de cartas clásico y popular que se juega en solitario. El objetivo del juego es ordenar todas las cartas en cuatro pilas separadas, una por cada palo, en orden ascendente desde el As hasta el Rey.">
+    <meta name="description"
+        content="El Solitario es un juego de cartas clásico y popular que se juega en solitario. El objetivo del juego es ordenar todas las cartas en cuatro pilas separadas, una por cada palo, en orden ascendente desde el As hasta el Rey.">
 
     <!-- Open Graph / Facebook -->
     <meta property="og:type" content="website">
     <meta property="og:url" content="https://solitarie.netlify.app/">
     <meta property="og:title" content="Solitarie">
-    <meta property="og:description" content="El Solitario es un juego de cartas clásico y popular que se juega en solitario. El objetivo del juego es ordenar todas las cartas en cuatro pilas separadas, una por cada palo, en orden ascendente desde el As hasta el Rey.">
+    <meta property="og:description"
+        content="El Solitario es un juego de cartas clásico y popular que se juega en solitario. El objetivo del juego es ordenar todas las cartas en cuatro pilas separadas, una por cada palo, en orden ascendente desde el As hasta el Rey.">
     <meta property="og:image" content="favicon.png">
 
     <!-- Twitter -->
     <meta property="twitter:card" content="summary_large_image">
     <meta property="twitter:url" content="https://solitarie.netlify.app/">
     <meta property="twitter:title" content="Solitarie">
-    <meta property="twitter:description" content="El Solitario es un juego de cartas clásico y popular que se juega en solitario. El objetivo del juego es ordenar todas las cartas en cuatro pilas separadas, una por cada palo, en orden ascendente desde el As hasta el Rey.">
+    <meta property="twitter:description"
+        content="El Solitario es un juego de cartas clásico y popular que se juega en solitario. El objetivo del juego es ordenar todas las cartas en cuatro pilas separadas, una por cada palo, en orden ascendente desde el As hasta el Rey.">
     <meta property="twitter:image" content="favicon.png">
 </head>
 
@@ -167,16 +170,79 @@
                 <div class="cards columns" value="6"></div>
             </div>
         </section>
+
+        <section>
+            <!-- Modal -->
+            <div class="modal fade" id="optionsModal" tabindex="-1" aria-labelledby="optionsModalLabel"
+                aria-hidden="true">
+                <div class="modal-dialog modal-dialog-centered modal-dialog-scrollable">
+                    <div class="modal-content">
+                        <div class="modal-header">
+                            <h4 class="modal-title" id="optionsModalLabel">Elegir una dificultad</h4>
+                        </div>
+                        <div class="modal-body">
+                            <div class="form-check">
+                                <input class="form-check-input" type="radio" name="difficultyOption" id="option1" value="1" checked>
+                                <label class="form-check-label" for="option1"> Fácil </label>
+                            </div>
+                            <div class="form-check">
+                                <input class="form-check-input" type="radio" name="difficultyOption" id="option2" value="2">
+                                <label class="form-check-label" for="option2"> Medio </label>
+                            </div>
+                            <div class="form-check">
+                                <input class="form-check-input" type="radio" name="difficultyOption" id="option3" value="3">
+                                <label class="form-check-label" for="option3"> Difícil </label>
+                            </div>
+                            <div class="form-check">
+                                <input class="form-check-input" type="radio" name="difficultyOption" id="option4" value="4">
+                                <label class="form-check-label" for="option4"> Experto </label>
+                            </div>
+                            <div class="form-check">
+                                <input class="form-check-input" type="radio" name="difficultyOption" id="option5" value="5">
+                                <label class="form-check-label" for="option5"> Maestro </label>
+                            </div>
+                            <div class="form-check">
+                                <input class="form-check-input" type="radio" name="difficultyOption" id="option6" value="6">
+                                <label class="form-check-label" for="option6"> Gran maestro </label>
+                            </div>
+                        </div>
+                        <div class="modal-footer">
+                            <button type="button" class="btn btn-primary" id="reproducir">Reproducir</button>
+                            <button type="button" class="btn btn-secondary" data-bs-dismiss="modal" id="cerrarModal">Cancelar</button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
     </main>
+    <footer>
+        <nav class="navbar fixed-bottom navbar-expand-lg navbar-dark bg-glass">
+            <div class="container-fluid">
+                <div>
+                    <button id="showOptionsModal" type="button" class="btn bg-transparent" data-bs-toggle="modal" data-bs-target="#optionsModal">
+                        <i class="fa fa-plus p-color" aria-hidden="true"></i>
+                        <br>
+                        <h5 class="title-option p-color">Nuevo</h5>
+                    </button>
+                </div>
+            </div>
+        </nav>
+    </footer>
 
     <audio id="flipcard" src="assets/soundEffects/flipcard.mp3"></audio>
     <audio id="shuffle" src="assets/soundEffects/shuffle.mp3"></audio>
     <audio id="movecard" src="assets/soundEffects/movecard.mp3"></audio>
     <audio id="empty" src="assets/soundEffects/empty.mp3"></audio>
+
+
     <!-- Option 1: Bootstrap Bundle with Popper -->
     <script src="assets/bootstrap/js/bootstrap.bundle.min.js"></script>
-    <script src="assets/app.js"></script>
-    <script src="assets/customize.js"></script>
+    <!-- <script src="assets/bootstrap/js/popper.min.js" ></script>
+    <script src="assets/bootstrap/js/bootstrap.min.js" ></script>-->
+
+    <script type="module" src="assets/game/app.js"></script>
+    <script type="module" src="assets/customize/customize.js"></script>
+    <script src="assets/common.js"></script>
 </body>
 
 </html>

@@ -28,6 +28,13 @@ a {
     text-decoration: none !important;
 }
 
+.btn:focus {
+    box-shadow: none !important;
+}
+.btn-close:focus {
+    box-shadow: none !important;
+}
+
 .p-color {
     color: var(--navbarColor) !important;
 }
@@ -172,6 +179,7 @@ a {
     color: #89ca1e;
 }
 
+/*Estilos para el dropdown de personalización*/
 .customize-div {
     display: grid;
     grid-template-columns: repeat(3, 1fr);
@@ -201,4 +209,45 @@ a {
 
 .customize-div div:nth-child(3) {
     background-color: #114b75;
+}
+
+/*estilos para el modal de opciones de juego*/
+#optionsModal{
+    color: white;
+}
+.modal-content{
+    border: 3px solid rgb(202, 202, 202);
+    background-color: #0d3b76;
+}
+
+#optionsModal .modal-header{
+    border-bottom: none;
+    justify-content: center;
+}
+
+#optionsModal .modal-footer{
+    border-top: none;
+    justify-content: center;
+}
+
+#optionsModal .form-check{
+    background-color: rgba(0, 0, 0, 0.5);
+    border-radius: 16px;
+    font-size: 1.4rem;
+    padding-left: 1.7em !important;
+    margin: .5rem 0 .5rem 0;
+    cursor: pointer;
+}
+
+#optionsModal .form-check input,
+#optionsModal .form-check label{
+    cursor: pointer;
+}
+
+/*Estilos para el footer*/
+#showOptionsModal i{
+    font-size: 1.5rem;
+}
+#showOptionsModal .title-option{
+    margin: 0;
 }
