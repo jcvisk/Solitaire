@@ -5,7 +5,7 @@
             return v.toString(16);
         });
     };
-    
+
     class Carta {
         constructor(numero, palo) {
             this.numero = numero;
@@ -129,7 +129,7 @@
             }
             playSound('flipcard');
         } else {
-            
+
             mazo = [...mazoAux.reverse()];
             mazoAux = [];
             if (mazo.length !== 0) {
@@ -137,7 +137,7 @@
                 newCardButton.alt = "card back";
 
                 playSound('shuffle');
-            }else{
+            } else {
                 playSound('empty');
             }
             mazoVisibleDiv.innerHTML = "";
@@ -205,7 +205,7 @@
         mazoAux.splice(index, 1);
     }
 
-    function validaMovimiento(column, cartasSoltadas, cartaOrigen, columnaActual, uuid, columnsPalos) {
+    function validaMovimiento(column, cartasSoltadas, cartaOrigen, columnaActual, columnsPalos) {
         if (!timerInicializado) {
             initTimer();
             timerInicializado = !timerInicializado;
@@ -229,7 +229,7 @@
 
                 if (cartaOrigen === "columnPalos") setPuntos('-', 10);
 
-                deleteAndAddCard(column, cartaSoltada, cartaOrigen, uuid);
+                deleteAndAddCard(column, cartaSoltada, cartaOrigen);
                 voltearCarta(columnaActual);
                 lastCard = cartaSoltada;
             }
@@ -249,8 +249,8 @@
                 if (cartaOrigen !== "columnPalos") {
                     cartaOrigen === "mazoVisibleDiv" ? setPuntos('+', 5) : setPuntos('+', 10);
                 }
-                
-                deleteAndAddCard(column, cartaSoltada, cartaOrigen, uuid);
+
+                deleteAndAddCard(column, cartaSoltada, cartaOrigen);
                 voltearCarta(columnaActual);
             }
         }
@@ -258,18 +258,18 @@
         playSound('movecard');
     }
 
-    function deleteAndAddCard(column, cartaSoltada, cartaOrigen, uuid) {
+    function deleteAndAddCard(column, cartaSoltada, cartaOrigen) {
         // eliminando la carta del mazo de donde venga en HTML
         cartaSoltada.parentElement.removeChild(cartaSoltada, cartaSoltada);
 
         if (cartaOrigen === "mazoVisibleDiv") {
             setPuntos('+', 5);
-            eliminarDelMazo(uuid);
+            eliminarDelMazo(cartaSoltada.getAttribute("uuid"));
         }
 
         // agregando la carta a la columna
         column.appendChild(cartaSoltada);
-        column.classList.contains("columns") ? cartaSoltada.setAttribute("data-origin",  "column") : cartaSoltada.setAttribute("data-origin",  "columnPalos");
+        column.classList.contains("columns") ? cartaSoltada.setAttribute("data-origin", "column") : cartaSoltada.setAttribute("data-origin", "columnPalos");
         column.classList.remove("drag-over");
     }
 
@@ -326,7 +326,7 @@
             const columnaActual = cartasSoltadas[0].parentElement;
 
             if (cartasSoltadas[0].getAttribute("show") !== "false") {
-                validaMovimiento(column, cartasSoltadas, cartaOrigen, columnaActual, uuids, false);
+                validaMovimiento(column, cartasSoltadas, cartaOrigen, columnaActual, false);
             }
         });
     });
@@ -361,7 +361,7 @@
             const columnaActual = cartasSoltadas[0].parentElement;
 
             if (cartasSoltadas[0].getAttribute("show") !== "false") {
-                validaMovimiento(column, cartasSoltadas, cartaOrigen, columnaActual, uuids, true);
+                validaMovimiento(column, cartasSoltadas, cartaOrigen, columnaActual, true);
             }
         });
     });

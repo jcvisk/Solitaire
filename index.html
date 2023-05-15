@@ -8,37 +8,76 @@
 
     <!-- Bootstrap CSS -->
     <link href="assets/bootstrap/css/bootstrap.min.css" rel="stylesheet">
+    <!-- Font Awesome -->
+    <script src="https://kit.fontawesome.com/28b14749ec.js" crossorigin="anonymous"></script>
     <!-- Custom CSS -->
     <link rel="stylesheet" href="assets/css/style.css">
+    <link rel="shortcut icon" href="favicon.png" type="image/x-icon">
 
+
+
+    <!-- Primary Meta Tags -->
     <title>Solitarie</title>
+    <meta name="title" content="Solitarie">
+    <meta name="description" content="El Solitario es un juego de cartas clásico y popular que se juega en solitario. El objetivo del juego es ordenar todas las cartas en cuatro pilas separadas, una por cada palo, en orden ascendente desde el As hasta el Rey.">
+
+    <!-- Open Graph / Facebook -->
+    <meta property="og:type" content="website">
+    <meta property="og:url" content="https://solitarie.netlify.app/">
+    <meta property="og:title" content="Solitarie">
+    <meta property="og:description" content="El Solitario es un juego de cartas clásico y popular que se juega en solitario. El objetivo del juego es ordenar todas las cartas en cuatro pilas separadas, una por cada palo, en orden ascendente desde el As hasta el Rey.">
+    <meta property="og:image" content="favicon.png">
+
+    <!-- Twitter -->
+    <meta property="twitter:card" content="summary_large_image">
+    <meta property="twitter:url" content="https://solitarie.netlify.app/">
+    <meta property="twitter:title" content="Solitarie">
+    <meta property="twitter:description" content="El Solitario es un juego de cartas clásico y popular que se juega en solitario. El objetivo del juego es ordenar todas las cartas en cuatro pilas separadas, una por cada palo, en orden ascendente desde el As hasta el Rey.">
+    <meta property="twitter:image" content="favicon.png">
 </head>
 
 <body>
     <header>
         <nav class="navbar navbar-expand-lg navbar-dark bg-glass">
             <div class="container-fluid">
-                <a class="navbar-brand" data-bs-toggle="offcanvas" href="#offcanvasExample" role="button"
-                    aria-controls="offcanvasExample">
-                    <span class="navbar-toggler-icon"></span>
-                </a>
+                <div class="d-flex align-items-center">
+                    <a class="navbar-brand " data-bs-toggle="offcanvas" href="#sidebar" role="button"
+                        aria-controls="sidebar">
+                        <i class="fa fa-bars p-color"></i>
+                    </a>
+                    <div class="dropdown">
+                        <a class="navbar-brand" href="#" id="navbarDropdown" role="button" data-bs-toggle="dropdown"
+                            aria-expanded="false">
+                            <i class='fa fa-cog p-color'></i>
+                        </a>
+                        <div class="dropdown-menu bg-glass" aria-labelledby="navbarDropdown">
+                            <div class="dropdown-header">
+                                <h5 class="p-color">Personalización</h5>
+                            </div>
+                            <div class="customize-div">
+                                <div class="theme" value="theme1"></div>
+                                <div class="theme" value="theme2"></div>
+                                <div class="theme" value="theme3"></div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
                 <div class="navbar-nav">
                     <a class="nav-link active">
-                        <h3>Puntuación <span id="points">0</span></h3>
+                        <h3 class="p-color">Puntuación <span id="points">0</span></h3>
                     </a>
                 </div>
                 <div class="navbar-nav">
                     <a class="nav-link active">
-                        <h3 id="timer">00:00:00</h3>
+                        <h3 id="timer" class="p-color">00:00:00</h3>
                     </a>
                 </div>
             </div>
         </nav>
 
-        <div class="offcanvas offcanvas-start dark-glass" tabindex="-1" id="offcanvasExample"
-            aria-labelledby="offcanvasExampleLabel">
+        <div class="offcanvas offcanvas-start dark-glass" tabindex="-1" id="sidebar" aria-labelledby="sidebarLabel">
             <div class="offcanvas-header">
-                <h3 class="offcanvas-title" id="offcanvasExampleLabel">
+                <h3 class="offcanvas-title" id="sidebarLabel">
                     Opciones de juego
                 </h3>
                 <button type="button" class="btn-close text-reset" data-bs-dismiss="offcanvas"
@@ -136,7 +175,8 @@
     <audio id="empty" src="assets/soundEffects/empty.mp3"></audio>
     <!-- Option 1: Bootstrap Bundle with Popper -->
     <script src="assets/bootstrap/js/bootstrap.bundle.min.js"></script>
-    <script  src="assets/app.js"></script>
+    <script src="assets/app.js"></script>
+    <script src="assets/customize.js"></script>
 </body>
 
 </html>
