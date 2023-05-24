@@ -1,5 +1,6 @@
 import Carta from "./Carta.js";
 import { shuffle, shuffleExpertLevel } from "./mixer.js";
+import {initTimer, pauseTimer, resetTimer, resumeTimer} from "./timer.js";
 
 (() => {
     //elementsHTML
@@ -10,7 +11,6 @@ import { shuffle, shuffleExpertLevel } from "./mixer.js";
     const mazoVisibleDiv = document.getElementById('mazoVisible');
     const columnsDivs = document.querySelectorAll('.columns');
     const columnsPalos = document.querySelectorAll('.palos');
-    const timer = document.getElementById("timer");
     const points = document.getElementById("points");
 
     (() => {
@@ -22,52 +22,6 @@ import { shuffle, shuffleExpertLevel } from "./mixer.js";
     let mazoResp = [];
 
     let timerInicializado = false;
-
-    // Inicializamos el contador de tiempo
-    let seconds = 0;
-    let minutes = 0;
-    let hours = 0;
-    let timerInterval; // Variable para almacenar el intervalo del temporizador
-    // Actualizamos el contador de tiempo cada segundo
-    function initTimer() {
-        timerInterval = setInterval(() => {
-            seconds++;
-
-            if (seconds >= 60) {
-                seconds = 0;
-                minutes++;
-
-                if (minutes >= 60) {
-                    minutes = 0;
-                    hours++;
-                }
-            }
-
-            // Formateamos el tiempo para mostrarlo en el HTML
-            const time = `${hours.toString().padStart(2, "0")}:${minutes.toString().padStart(2, "0")}:${seconds.toString().padStart(2, "0")}`;
-
-            // Actualizamos el HTML con el tiempo actualizado
-            timer.innerHTML = time;
-        }, 1000);
-    }
-
-    function pauseTimer() {
-        clearInterval(timerInterval);
-    }
-
-    function resetTimer() {
-        clearInterval(timerInterval);
-        seconds = 0;
-        minutes = 0;
-        hours = 0;
-        timerInicializado = false;
-        timer.innerHTML = "00:00:00";
-    }
-
-    function resumeTimer() {
-        initTimer();
-    }
-
 
     //Funcion para los sonidos
     function playSound(id) {
@@ -206,6 +160,7 @@ import { shuffle, shuffleExpertLevel } from "./mixer.js";
         });
         //se recetea el timer
         resetTimer();
+        timerInicializado = false;
         //se recetea el puntaje
         puntaje = 0;
         points.innerHTML = puntaje;

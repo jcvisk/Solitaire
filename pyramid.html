@@ -1,0 +1,220 @@
+<!doctype html>
+<html lang="en">
+
+<head>
+    <!-- Required meta tags -->
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+
+    <!-- Bootstrap CSS -->
+    <link href="assets/bootstrap/css/bootstrap.min.css" rel="stylesheet">
+    <!-- Font Awesome -->
+    <script src="https://kit.fontawesome.com/28b14749ec.js" crossorigin="anonymous"></script>
+    <!-- Custom CSS -->
+    <link rel="stylesheet" href="assets/css/common.css">
+    <link rel="stylesheet" href="assets/css/pyramid.css">
+    <link rel="shortcut icon" href="favicon.png" type="image/x-icon">
+
+
+
+    <!-- Primary Meta Tags -->
+    <title>Solitarie</title>
+    <meta name="title" content="Solitarie">
+    <meta name="description"
+        content="El Solitario es un juego de cartas clásico y popular que se juega en solitario. El objetivo del juego es ordenar todas las cartas en cuatro pilas separadas, una por cada palo, en orden ascendente desde el As hasta el Rey.">
+
+    <!-- Open Graph / Facebook -->
+    <meta property="og:type" content="website">
+    <meta property="og:url" content="https://solitarie.netlify.app/">
+    <meta property="og:title" content="Solitarie">
+    <meta property="og:description"
+        content="El Solitario es un juego de cartas clásico y popular que se juega en solitario. El objetivo del juego es ordenar todas las cartas en cuatro pilas separadas, una por cada palo, en orden ascendente desde el As hasta el Rey.">
+    <meta property="og:image" content="favicon.png">
+
+    <!-- Twitter -->
+    <meta property="twitter:card" content="summary_large_image">
+    <meta property="twitter:url" content="https://solitarie.netlify.app/">
+    <meta property="twitter:title" content="Solitarie">
+    <meta property="twitter:description"
+        content="El Solitario es un juego de cartas clásico y popular que se juega en solitario. El objetivo del juego es ordenar todas las cartas en cuatro pilas separadas, una por cada palo, en orden ascendente desde el As hasta el Rey.">
+    <meta property="twitter:image" content="favicon.png">
+</head>
+
+<body>
+    <header>
+        <nav class="navbar navbar-expand-lg navbar-dark bg-glass">
+            <div class="container-fluid">
+                <div class="d-flex align-items-center">
+                    <a class="navbar-brand " data-bs-toggle="offcanvas" href="#sidebar" role="button"
+                        aria-controls="sidebar">
+                        <i class="fa fa-bars p-color"></i>
+                    </a>
+                    <div class="dropdown">
+                        <a class="navbar-brand" href="#" id="navbarDropdown" role="button" data-bs-toggle="dropdown"
+                            aria-expanded="false">
+                            <i class='fa fa-cog p-color'></i>
+                        </a>
+                        <div class="dropdown-menu bg-glass" aria-labelledby="navbarDropdown">
+                            <div class="dropdown-header">
+                                <h5 class="p-color">Personalización</h5>
+                            </div>
+                            <div class="customize-div" id="customize"></div>
+                        </div>
+                    </div>
+                </div>
+                <div class="navbar-nav">
+                    <a class="nav-link active">
+                        <h3 class="p-color">Puntuación <span id="points">0</span></h3>
+                    </a>
+                </div>
+                <div class="navbar-nav">
+                    <a class="nav-link active">
+                        <h3 id="timer" class="p-color">00:00:00</h3>
+                    </a>
+                </div>
+            </div>
+        </nav>
+
+        <div class="offcanvas offcanvas-start dark-glass" tabindex="-1" id="sidebar" aria-labelledby="sidebarLabel">
+            <div class="offcanvas-header">
+                <h3 class="offcanvas-title" id="sidebarLabel">
+                    Opciones de juego
+                </h3>
+                <button type="button" class="btn-close text-reset" data-bs-dismiss="offcanvas"
+                    aria-label="Close"></button>
+            </div>
+            <div class="offcanvas-body list">
+                <a href="index.html">
+                    <div class="list-item">
+                        <img src="assets/icons/klondike.png" alt="klondike" class="sidebar-icon">
+                        <h3 class="k">Klondike</h3>
+                    </div>
+                </a>
+                <a href="spider.html">
+                    <div class="list-item">
+                        <img src="assets/icons/spider.png" alt="spider" class="sidebar-icon">
+                        <h3 class="s">Spider</h3>
+                    </div>
+                </a>
+                <a href="freecell.html">
+                    <div class="list-item">
+                        <img src="assets/icons/freecell.png" alt="freecell" class="sidebar-icon invert-color">
+                        <h3 class="f">FreeCell</h3>
+                    </div>
+                </a>
+                <a href="pyramid.html">
+                    <div class="list-item">
+                        <img src="assets/icons/pyramid.png" alt="pyramid" class="sidebar-icon invert-color">
+                        <h3 class="p">Pyramid</h3>
+                    </div>
+                </a>
+                <a href="tripeaks.html">
+                    <div class="list-item">
+                        <img src="assets/icons/tripeaks.png" alt="tripeaks" class="sidebar-icon invert-color">
+                        <h3 class="t">TriPeaks</h3>
+                    </div>
+                </a>
+            </div>
+    </header>
+    <main>
+        <section class="container mt-2">
+            <div class="piramide">
+                <div class="nivel"></div>
+                <div class="nivel"></div>
+                <div class="nivel"></div>
+                <div class="nivel"></div>
+                <div class="nivel"></div>
+                <div class="nivel"></div>
+                <div class="nivel"></div>
+            </div>
+        </section>
+        <section class="container mt-1 view-cards">
+            <div class="take-card"></div>
+            <div id="newCard">
+                <i class="fa fa-arrow-right p-color" aria-hidden="true"></i>
+            </div>
+            <div class="card-content"></div>
+        </section>
+
+
+        <section>
+            <!-- Modal -->
+            <div class="modal fade" id="optionsModal" tabindex="-1" aria-labelledby="optionsModalLabel"
+                aria-hidden="true">
+                <div class="modal-dialog modal-dialog-centered modal-dialog-scrollable">
+                    <div class="modal-content">
+                        <div class="modal-header">
+                            <h4 class="modal-title" id="optionsModalLabel">Elegir una dificultad</h4>
+                        </div>
+                        <div class="modal-body">
+                            <div class="form-check">
+                                <input class="form-check-input" type="radio" name="difficultyOption" id="option1"
+                                    value="1" checked>
+                                <label class="form-check-label" for="option1"> Fácil </label>
+                            </div>
+                            <div class="form-check">
+                                <input class="form-check-input" type="radio" name="difficultyOption" id="option2"
+                                    value="2">
+                                <label class="form-check-label" for="option2"> Medio </label>
+                            </div>
+                            <div class="form-check">
+                                <input class="form-check-input" type="radio" name="difficultyOption" id="option3"
+                                    value="3">
+                                <label class="form-check-label" for="option3"> Difícil </label>
+                            </div>
+                            <div class="form-check">
+                                <input class="form-check-input" type="radio" name="difficultyOption" id="option4"
+                                    value="4">
+                                <label class="form-check-label" for="option4"> Experto </label>
+                            </div>
+                            <div class="form-check">
+                                <input class="form-check-input" type="radio" name="difficultyOption" id="option5"
+                                    value="5">
+                                <label class="form-check-label" for="option5"> Maestro </label>
+                            </div>
+                            <div class="form-check">
+                                <input class="form-check-input" type="radio" name="difficultyOption" id="option6"
+                                    value="6">
+                                <label class="form-check-label" for="option6"> Gran maestro </label>
+                            </div>
+                        </div>
+                        <div class="modal-footer">
+                            <button type="button" class="btn btn-primary" id="reproducir">Reproducir</button>
+                            <button type="button" class="btn btn-secondary" data-bs-dismiss="modal"
+                                id="cerrarModal">Cancelar</button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+    </main>
+    <footer>
+        <nav class="navbar fixed-bottom navbar-expand-lg navbar-dark bg-glass">
+            <div class="container-fluid">
+                <div>
+                    <button id="showOptionsModal" type="button" class="btn bg-transparent" data-bs-toggle="modal"
+                        data-bs-target="#optionsModal">
+                        <i class="fa fa-plus p-color" aria-hidden="true"></i>
+                        <br>
+                        <h5 class="title-option p-color">Nuevo</h5>
+                    </button>
+                </div>
+            </div>
+        </nav>
+    </footer>
+
+    <audio id="flipcard" src="assets/soundEffects/flipcard.mp3"></audio>
+    <audio id="shuffle" src="assets/soundEffects/shuffle.mp3"></audio>
+    <audio id="movecard" src="assets/soundEffects/movecard.mp3"></audio>
+    <audio id="empty" src="assets/soundEffects/empty.mp3"></audio>
+
+
+    <!-- Option 1: Bootstrap Bundle with Popper -->
+    <script src="assets/bootstrap/js/bootstrap.bundle.min.js"></script>
+
+    <script type="module" src="assets/game/pyramid.js"></script>
+    <script type="module" src="assets/customize/customize.js"></script>
+    <script src="assets/common.js"></script>
+</body>
+
+</html>

@@ -11,7 +11,8 @@
     <!-- Font Awesome -->
     <script src="https://kit.fontawesome.com/28b14749ec.js" crossorigin="anonymous"></script>
     <!-- Custom CSS -->
-    <link rel="stylesheet" href="assets/css/style.css">
+    <link rel="stylesheet" href="assets/css/common.css">
+    <link rel="stylesheet" href="assets/css/solitarie.css">
     <link rel="shortcut icon" href="favicon.png" type="image/x-icon">
 
 
@@ -57,11 +58,7 @@
                             <div class="dropdown-header">
                                 <h5 class="p-color">Personalización</h5>
                             </div>
-                            <div class="customize-div">
-                                <div class="theme" value="theme1"></div>
-                                <div class="theme" value="theme2"></div>
-                                <div class="theme" value="theme3"></div>
-                            </div>
+                            <div class="customize-div" id="customize"></div>
                         </div>
                     </div>
                 </div>
@@ -123,7 +120,7 @@
         <section class="container tablero mt-5">
             <div class="m-auto">
                 <!-- Aquí se muestra el mazo para cliquear y mostrar la carta disponible -->
-                <div class="cards">
+                <div class="cards" style="position: relative;">
                     <img src="assets/cartas/red_back.png" alt="card back" class="img-fluid" id="newCard">
                 </div>
             </div>
@@ -182,33 +179,40 @@
                         </div>
                         <div class="modal-body">
                             <div class="form-check">
-                                <input class="form-check-input" type="radio" name="difficultyOption" id="option1" value="1" checked>
+                                <input class="form-check-input" type="radio" name="difficultyOption" id="option1"
+                                    value="1" checked>
                                 <label class="form-check-label" for="option1"> Fácil </label>
                             </div>
                             <div class="form-check">
-                                <input class="form-check-input" type="radio" name="difficultyOption" id="option2" value="2">
+                                <input class="form-check-input" type="radio" name="difficultyOption" id="option2"
+                                    value="2">
                                 <label class="form-check-label" for="option2"> Medio </label>
                             </div>
                             <div class="form-check">
-                                <input class="form-check-input" type="radio" name="difficultyOption" id="option3" value="3">
+                                <input class="form-check-input" type="radio" name="difficultyOption" id="option3"
+                                    value="3">
                                 <label class="form-check-label" for="option3"> Difícil </label>
                             </div>
                             <div class="form-check">
-                                <input class="form-check-input" type="radio" name="difficultyOption" id="option4" value="4">
+                                <input class="form-check-input" type="radio" name="difficultyOption" id="option4"
+                                    value="4">
                                 <label class="form-check-label" for="option4"> Experto </label>
                             </div>
                             <div class="form-check">
-                                <input class="form-check-input" type="radio" name="difficultyOption" id="option5" value="5">
+                                <input class="form-check-input" type="radio" name="difficultyOption" id="option5"
+                                    value="5">
                                 <label class="form-check-label" for="option5"> Maestro </label>
                             </div>
                             <div class="form-check">
-                                <input class="form-check-input" type="radio" name="difficultyOption" id="option6" value="6">
+                                <input class="form-check-input" type="radio" name="difficultyOption" id="option6"
+                                    value="6">
                                 <label class="form-check-label" for="option6"> Gran maestro </label>
                             </div>
                         </div>
                         <div class="modal-footer">
                             <button type="button" class="btn btn-primary" id="reproducir">Reproducir</button>
-                            <button type="button" class="btn btn-secondary" data-bs-dismiss="modal" id="cerrarModal">Cancelar</button>
+                            <button type="button" class="btn btn-secondary" data-bs-dismiss="modal"
+                                id="cerrarModal">Cancelar</button>
                         </div>
                     </div>
                 </div>
@@ -237,12 +241,24 @@
 
     <!-- Option 1: Bootstrap Bundle with Popper -->
     <script src="assets/bootstrap/js/bootstrap.bundle.min.js"></script>
-    <!-- <script src="assets/bootstrap/js/popper.min.js" ></script>
-    <script src="assets/bootstrap/js/bootstrap.min.js" ></script>-->
 
-    <script type="module" src="assets/game/app.js"></script>
+    <script type="module" src="assets/game/solitarie.js"></script>
     <script type="module" src="assets/customize/customize.js"></script>
     <script src="assets/common.js"></script>
+    <script>
+        const dropdown = document.getElementById('navbarDropdown');
+        const newCardBtn = document.getElementById('newCard');
+
+        // El dropdown se está mostrando
+        dropdown.addEventListener('show.bs.dropdown', function () {
+            newCardBtn.parentNode.style.zIndex = '-1'
+        });
+
+        // El dropdown se está ocultando
+        dropdown.addEventListener('hide.bs.dropdown', function () {
+            newCardBtn.parentNode.style.zIndex = '';
+        });
+    </script>
 </body>
 
 </html>

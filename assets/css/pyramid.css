@@ -1,0 +1,61 @@
+:root{
+    --cardWidth: 114.75px;
+    --cardHeight: 175.35px;
+}
+
+.piramide {
+    text-align: center;
+}
+
+.nivel {
+    margin-top: -11%;
+}
+.nivel:nth-child(1) {
+    margin-top: 0 !important;
+}
+
+.nivel div,
+.take-card {
+    display: inline-block;
+    width: var(--cardWidth);
+    height: var(--cardHeight);
+    margin: 5px;
+}
+
+.nivel div img,
+.take-card{
+    box-shadow: 0 8px 32px 0 rgba(0, 0, 0, 0.37);
+}
+
+.take-card{
+    position: relative;
+}
+
+.take-card img{
+    position: absolute;
+}
+
+.card-content {
+    position: relative;
+    background: rgba(255, 255, 255, 0);
+    box-shadow: 0 8px 32px 0 rgba(0, 0, 0, 0.37);
+    backdrop-filter: blur(4px);
+    -webkit-backdrop-filter: blur(4px);
+    border-radius: 10px;
+    width: var(--cardWidth);
+    height: var(--cardHeight);
+}
+.card-content img{
+    position: absolute;
+}
+
+.view-cards{
+    display: flex;
+    align-items: center;
+    gap: 1rem;
+    justify-content: center;
+}
+
+.view-cards i{
+    font-size: 2rem;
+}

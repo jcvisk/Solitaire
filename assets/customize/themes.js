@@ -1,3 +1,9 @@
+/**
+ * backgroundColor: color del fondo
+ * navbarColor: color de las letras
+ * strokeColor: color de la línea
+ * fillColor: color del punto
+ */
 const THEMES = [
     {
         theme1: {
@@ -21,6 +27,14 @@ const THEMES = [
             navbarColor: '#ffffff',
             strokeColor: '0b314c',
             fillColor: '082234'
+        }
+    },
+    {
+        theme4: {
+            backgroundColor: '#712cb1',
+            navbarColor: '#ffffff',
+            strokeColor: '4b1a79',
+            fillColor: '1e0932'
         }
     }
 ];

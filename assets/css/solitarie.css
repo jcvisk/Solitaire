@@ -1,0 +1,71 @@
+.tablero {
+    display: grid;
+    grid-template-columns: repeat(7, 1fr);
+    grid-template-rows: repeat(1, 1fr);
+}
+
+.mazoVisible {
+    grid-area: 1 / 2 / 2 / 4;
+}
+
+.mazoVisible img {
+    position: relative;
+    left: 106px;
+    margin-left: -106px;
+}
+
+.mazoVisible img:nth-last-child(n+4) {
+    display: none;
+}
+
+.tablero div .cards {
+    background: rgba(255, 255, 255, 0);
+    box-shadow: 0 8px 32px 0 rgba(0, 0, 0, 0.37);
+    backdrop-filter: blur(4px);
+    -webkit-backdrop-filter: blur(4px);
+    border-radius: 10px;
+
+    width: 127.5px;
+    height: 194.84px;
+}
+
+.secc2 .cards:nth-child(n+8) img {
+    margin-top: -150%;
+}
+
+.secc2 img {
+    position: relative;
+    top: 168px;
+    margin-top: -130%;
+}
+
+.secc2 img[show="false"]:not([show="true"]) {
+    margin-top: -138%;
+}
+
+#newCard,
+.activo {
+    cursor: pointer;
+}
+
+/* .selected {
+    filter: drop-shadow(0px 0px 10px #75FF00);
+} */
+
+.cards.palos {
+    position: relative;
+}
+
+.cards.palos img {
+    position: absolute;
+}
+
+.sidebar-icon {
+    width: 10%;
+}
+
+/*Estilos al arrastrar y soltar*/
+.drag-over {
+    box-shadow: 0 0 15px 5px rgba(0, 255, 255, 0.5) !important;
+    filter: drop-shadow(0px 0px 10px rgba(0, 255, 255, 1)) !important;
+}
